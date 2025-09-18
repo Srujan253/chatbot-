@@ -32,6 +32,12 @@ const ChatBot = () => {
       for (const question of qa.questions) {
         if (lowerUserQuestion.includes(question.toLowerCase()) || 
             question.toLowerCase().includes(lowerUserQuestion)) {
+          // If there are multiple answers, pick a random one
+          if (qa.answers && Array.isArray(qa.answers)) {
+            const randomIndex = Math.floor(Math.random() * qa.answers.length);
+            return qa.answers[randomIndex];
+          }
+          // Fallback to single answer format
           return qa.answer;
         }
       }
